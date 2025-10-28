@@ -1,0 +1,16 @@
+# 0-mysql-pv.yaml
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: mysql-pv # Tên của "ổ cứng"
+spec:
+  storageClassName: manual # Chúng ta tự định nghĩa, không dùng tự động
+  capacity:
+    storage: 1Gi # Dung lượng ổ cứng là 1GB
+  accessModes:
+    - ReadWriteOnce # Chỉ cho phép 1 Pod đọc/ghi cùng lúc (an toàn cho MySQL)
+  hostPath:
+    # Đây là đường dẫn trên máy Windows của bạn
+    # QUAN TRỌNG: Phải viết theo kiểu Linux/WSL
+    # Vi du: C:\k8s-data\mysql  ->  /c/k8s-data/mysql
+    path: "/run/desktop/mnt/host/d/DockerData/mysql"

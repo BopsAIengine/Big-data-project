@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: mysql-service # Đây là "tên" mà các pod khác trong K8s dùng để gọi
+spec:
+  selector:
+    app: mysql # Phải khớp với label của Deployment
+  ports:
+    - protocol: TCP
+      port: 3306       # Cổng nội bộ K8s (ClusterIP)
+      targetPort: 3306 # Cổng của pod (containerPort)
+  type: ClusterIP      # Chỉ cho phép kết nối TỪ BÊN TRONG K8s

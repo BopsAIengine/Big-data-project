@@ -1,0 +1,12 @@
+# 5-hdfs-datanode-pvc.yaml
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: hdfs-datanode-pvc
+spec:
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: manual-hdfs-dn # Phải khớp với PV
+  resources:
+    requests:
+      storage: 5Gi # Phải khớp với PV

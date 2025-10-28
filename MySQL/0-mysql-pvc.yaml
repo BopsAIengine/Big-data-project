@@ -1,0 +1,12 @@
+# 0-mysql-pvc.yaml
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: mysql-pvc # Tên của "yêu cầu"
+spec:
+  storageClassName: manual # Phải khớp với PV
+  accessModes:
+    - ReadWriteOnce # Phải khớp với PV
+  resources:
+    requests:
+      storage: 1Gi # Yêu cầu 1GB (phải nhỏ hơn hoặc bằng dung lượng PV)

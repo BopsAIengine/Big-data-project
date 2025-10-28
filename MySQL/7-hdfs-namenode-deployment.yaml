@@ -1,0 +1,34 @@
+# 7-hdfs-namenode-deployment.yaml (Đã sửa lỗi)
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hdfs-namenode-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: hdfs-namenode # Phải khớp với Service selector
+  template:
+    metadata:
+      labels:
+        app: hdfs-namenode # Phải khớp với Service selector
+    spec:
+      containers:
+      - name: hdfs-namenode
+        image: bde2020/hadoop-namenode:2.0.0-hadoop2.7.4-java8
+        env:
+          - name: CLUSTER_NAME
+            value: "hdfs-cluster"
+          # Dòng này tắt kiểm tra hostname
+          - name: HDFS_CONF_dfs_namenode_datanode_registration_ip_DASH_hostname_DASH_check
+            value: "false"
+        ports:
+        - containerPort: 50070 # WebUI
+        - containerPort: 8020  # RPC
+        volumeMounts:
+        - name: hdfs-storage
+          mountPath: /hadoop/dfs/name
+      volumes:
+      - name: hdfs-storage
+        persistentVolumeClaim:
+          claimName: hdfs-namenode-pvc # Yêu cầu PVC của NameNode

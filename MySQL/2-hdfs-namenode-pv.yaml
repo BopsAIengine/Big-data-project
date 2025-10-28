@@ -1,0 +1,15 @@
+# 2-hdfs-namenode-pv.yaml
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: hdfs-namenode-pv
+spec:
+  capacity:
+    storage: 2Gi # Metadata thường nhỏ
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: manual-hdfs-nn
+  hostPath:
+    path: "/run/desktop/mnt/host/d/DockerData/hdfs/namenode"
