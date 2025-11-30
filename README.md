@@ -1,2 +1,13 @@
+Kiến trúc ETL lấy cảm hứng từ https://www.databricks.com/glossary/medallion-architecture phân tách các quy trình thành nhiều giai đoạn dữ liệu,lưu trữ dữ liệu thô được trích xuất để đối chiếu dữ liệu sau này và cho phép kiến ​​trúc chịu lỗi bằng cách khôi phục dữ liệu một cách thuận tiện
+
+<img width="777" height="244" alt="image" src="https://github.com/user-attachments/assets/fc3aca09-e14f-4b6f-9113-9e746864a5f4" />
+
+Việc nhập dữ liệu từlớp Đồng sang lớp Bạc có thể được thực hiện bằng một khuôn khổ tùy chỉnh. Dùng pyspark
+
+Triển khai Data pipeline:
 
 <img width="855" height="449" alt="image" src="https://github.com/user-attachments/assets/bdbb7934-e7c7-4297-9a72-7c347bff23ca" />
+
+Dự án này sử dụng khung Ingestion Pyspark chịu trách nhiệm về Ingestion (Ingestion là một phần xử lý giữa vùng đồng và vùng bạc , chịu trách nhiệm làm sạch hoặc chuẩn bị dữ liệu thô để sẵn sàng tổng hợp)
+
+
