@@ -15,10 +15,14 @@ Dự án này sử dụng khung Ingestion Pyspark chịu trách nhiệm về Ing
 
 Thiết lập mối quan hệ code:
 Docker compose sẽ sao chép dữ liệu thô: data/uncleaned_data.csv và docker/setup.sql vào một container cơ sở dữ liệu postgres nguồn để mô phỏng nguồn dữ liệu dưới dạng RDBMS. Với vai trò setup.sqllà điểm vào của container, cơ sở dữ liệu postgres nguồn sẽ tự động khởi tạo bảng và tải dữ liệu vào. Tất cả các bước thực thi được định nghĩa trong docker/postgres.Dockerfile
+
 Docker compose sẽ sao chép docker/target.sql vào một container cơ sở dữ liệu postgres đích để mô phỏng cơ sở dữ liệu đích dưới dạng RDBMS. Với target.sql làm điểm vào của container, cơ sở dữ liệu postgres đích sẽ khởi tạo một bảng trống đang chờ các quy trình ETL. Tất cả các bước thực thi được định nghĩa trong docker/postgres-target.Dockerfile
+
 Docker compose sẽ thực hiện những điều sau:
-Gắn khối lượng thông tin xác thực (GCP-ADC, AWS) vào bộ lập lịch luồng không khí và các container máy chủ web. Nó cũng gắn các thành phần cần thiết cho luồng không khí như logsthư mục src/config/variables.json và src/config/connections.json , sẽ được trình bày chi tiết hơn trong Chủ đề 2.1.3 Thiết lập Kết nối và Biến Airflow.
+Gắn khối lượng thông tin xác thực (GCP-ADC) vào bộ lập lịch luồng không khí và các container máy chủ web. Nó cũng gắn các thành phần cần thiết cho luồng không khí như logsthư mục src/config/variables.json và src/config/connections.json , sẽ được trình bày chi tiết hơn trong Chủ đề 2.1.3 Thiết lập Kết nối và Biến Airflow.
+
 Gắn docker/airflow-entrypoint.sh vào bộ lập lịch Airflow và container máy chủ web, sau đó sử dụng nó làm tập lệnh điểm vào để nhập các tệp variables.json và connections.json đã gắn kết vào thời gian chạy khi khởi động lần đầu. Các bước liên quan đến xác thực cũng sẽ được giải thích trong Chủ đề 2.1.4 Điểm vào Airflow .
+
 Sử dụng airflow.properties để cấu hình các biến môi trường của vùng chứa Airflow (hoạt động như .envtệp trong vùng chứa airflow)
 Cài đặt các dependency python của airflow được chỉ định trong pyproject.toml được thực thi bởi airflow.Dockerfile với poetry.lock 
 
